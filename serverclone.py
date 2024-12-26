@@ -9,11 +9,11 @@ def print_delete(message):
     print(f'{Fore.RED}[-]{Style.RESET_ALL} {message}')
 
 def print_warning(message):
-    print(f'{Fore.RED}[WARNING]{Style.RESET_ALL} {message}')
+    print(f'{Fore.RED}[UYARI]{Style.RESET_ALL} {message}')
 
 
 def print_error(message):
-    print(f'{Fore.RED}[ERROR]{Style.RESET_ALL} {message}')
+    print(f'{Fore.RED}[HATA]{Style.RESET_ALL} {message}')
 
 
 class Clone:
@@ -23,11 +23,11 @@ class Clone:
                 try:
                     if role.name != "@everyone":
                         await role.delete()
-                        print_delete(f"Deleted Role: {role.name}")
+                        print_delete(f"Rol Silindi: {role.name}")
                 except discord.Forbidden:
-                    print_error(f"Error While Deleting Role: {role.name}")
+                    print_error(f"Rol Silinirken Hata: {role.name}")
                 except discord.HTTPException:
-                    print_error(f"Unable to Delete Role: {role.name}")
+                    print_error(f"Rol Silinemedi: {role.name}")
 
     @staticmethod
     async def roles_create(guild_to: discord.Guild, guild_from: discord.Guild):
@@ -46,22 +46,22 @@ class Clone:
                     hoist=role.hoist,
                     mentionable=role.mentionable
                 )
-                print_add(f"Created Role {role.name}")
+                print_add(f"Rol Oluşturuldu: {role.name}")
             except discord.Forbidden:
-                print_error(f"Error While Creating Role: {role.name}")
+                print_error(f"Rol Oluşturulurken Hata: {role.name}")
             except discord.HTTPException:
-                print_error(f"Unable to Create Role: {role.name}")
+                print_error(f"Rol Oluşturulamadı: {role.name}")
 
     @staticmethod
     async def channels_delete(guild_to: discord.Guild):
         for channel in guild_to.channels:
             try:
                 await channel.delete()
-                print_delete(f"Deleted Channel: {channel.name}")
+                print_delete(f"Kanallar Silindi: {channel.name}")
             except discord.Forbidden:
-                print_error(f"Error While Deleting Channel: {channel.name}")
+                print_error(f"Kanallar Silinirken Hata: {channel.name}")
             except discord.HTTPException:
-                print_error(f"Unable To Delete Channel: {channel.name}")
+                print_error(f"Kanallar Silinemedi: {channel.name}")
 
     @staticmethod
     async def categories_create(guild_to: discord.Guild, guild_from: discord.Guild):
@@ -78,11 +78,11 @@ class Clone:
                     name=channel.name,
                     overwrites=overwrites_to)
                 await new_channel.edit(position=channel.position)
-                print_add(f"Created Category: {channel.name}")
+                print_add(f"Kategori Oluşturuldu: {channel.name}")
             except discord.Forbidden:
-                print_error(f"Error While Deleting Category: {channel.name}")
+                print_error(f"Kategori Oluşturulurken Hata: {channel.name}")
             except discord.HTTPException:
-                print_error(f"Unable To Delete Category: {channel.name}")
+                print_error(f"Kategori Oluşturulamadı: {channel.name}")
 
     @staticmethod
     async def channels_create(guild_to: discord.Guild, guild_from: discord.Guild):
@@ -96,7 +96,7 @@ class Clone:
                         if category.name == channel_text.category.name:
                             break
                     except AttributeError:
-                        print_warning(f"Channel {channel_text.name} doesn't have any category!")
+                        print_warning(f"Kanaldan {channel_text.name} herhangi bir kategori yok!")
                         category = None
                         break
 
@@ -119,13 +119,13 @@ class Clone:
                         position=channel_text.position)
                 if category is not None:
                     await new_channel.edit(category=category)
-                print_add(f"Created Text Channel: {channel_text.name}")
+                print_add(f"Metin Kanalı Oluşturuldu: {channel_text.name}")
             except discord.Forbidden:
-                print_error(f"Error While Creating Text Channel: {channel_text.name}")
+                print_error(f"Metin Kanalı Oluşturulurken Hata: {channel_text.name}")
             except discord.HTTPException:
-                print_error(f"Unable To Creating Text Channel: {channel_text.name}")
+                print_error(f"Metin Kanalı Oluşturulamadı: {channel_text.name}")
             except:
-                print_error(f"Error While Creating Text Channel: {channel_text.name}")
+                print_error(f"Metin Kanalı Oluşturulurken Hata: {channel_text.name}")
 
         category = None
         for channel_voice in guild_from.voice_channels:
@@ -135,7 +135,7 @@ class Clone:
                         if category.name == channel_voice.category.name:
                             break
                     except AttributeError:
-                        print_warning(f"Channel {channel_voice.name} doesn't have any category!")
+                        print_warning(f"Kanaldan {channel_voice.name} herhangi bir kategori yok!")
                         category = None
                         break
 
@@ -158,13 +158,13 @@ class Clone:
                         position=channel_voice.position)
                 if category is not None:
                     await new_channel.edit(category=category)
-                print_add(f"Created Voice Channel: {channel_voice.name}")
+                print_add(f"Sohbet Kanalı Oluşturuldu: {channel_voice.name}")
             except discord.Forbidden:
-                print_error(f"Error While Creating Voice Channel: {channel_voice.name}")
+                print_error(f"Sohbet Kanalı Oluşturulurken Hata: {channel_voice.name}")
             except discord.HTTPException:
-                print_error(f"Unable To Creating Voice Channel: {channel_voice.name}")
+                print_error(f"Sohbet Kanalı Oluşturulamadı: {channel_voice.name}")
             except:
-                print_error(f"Error While Creating Voice Channel: {channel_voice.name}")
+                print_error(f"Sohbet Kanalı Oluşturulurken Hata: {channel_voice.name}")
 
 
     @staticmethod
@@ -172,11 +172,11 @@ class Clone:
         for emoji in guild_to.emojis:
             try:
                 await emoji.delete()
-                print_delete(f"Deleted Emoji: {emoji.name}")
+                print_delete(f"Emoji Silindi: {emoji.name}")
             except discord.Forbidden:
-                print_error(f"Error While Deleting Emoji{emoji.name}")
+                print_error(f"Emoji Silinirken Hata: {emoji.name}")
             except discord.HTTPException:
-                print_error(f"Error While Deleting Emoji {emoji.name}")
+                print_error(f"Emoji Silinemedi: {emoji.name}")
 
     @staticmethod
     async def emojis_create(guild_to: discord.Guild, guild_from: discord.Guild):
@@ -187,11 +187,11 @@ class Clone:
                 await guild_to.create_custom_emoji(
                     name=emoji.name,
                     image=emoji_image)
-                print_add(f"Created Emoji {emoji.name}")
+                print_add(f"Emoji Oluşturuldu: {emoji.name}")
             except discord.Forbidden:
-                print_error(f"Error While Creating Emoji {emoji.name} ")
+                print_error(f"Emoji Oluşturulurken Hata: {emoji.name}")
             except discord.HTTPException:
-                print_error(f"Error While Creating Emoji {emoji.name}")
+                print_error(f"Emoji Oluşturulamadı: {emoji.name}")
 
     @staticmethod
     async def guild_edit(guild_to: discord.Guild, guild_from: discord.Guild):
@@ -199,14 +199,14 @@ class Clone:
             try:
                 icon_image = await guild_from.icon_url.read()
             except discord.errors.DiscordException:
-                print_error(f"Can't read icon image from {guild_from.name}")
+                print_error(f"{guild_from.name} sunucusundan ikon resmi alınamıyor")
                 icon_image = None
             await guild_to.edit(name=f'{guild_from.name}')
             if icon_image is not None:
                 try:
                     await guild_to.edit(icon=icon_image)
-                    print_add(f"Guild Icon Changed: {guild_to.name}")
+                    print_add(f"Sunucu İkonu Değiştirildi: {guild_to.name}")
                 except:
-                    print_error(f"Error While Changing Guild Icon: {guild_to.name}")
+                    print_error(f"Sunucu İkonu Değiştirilemedi: {guild_to.name}")
         except discord.Forbidden:
-            print_error(f"Error While Changing Guild Icon: {guild_to.name}")
+            print_error(f"Sunucu İkonu Değiştirilemedi: {guild_to.name}")
